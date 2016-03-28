@@ -1,0 +1,32 @@
+.tree-view
+{
+    height: 100%;
+    overflow: auto;
+}
+.tree-view .tree-view-node
+{
+    position: relative;
+    margin: 5px 0px 0px 10px;
+    font-size: 14px;
+}
+.tree-view .tree-view-node .tree-view-node-title
+{
+    cursor: pointer;
+    position: relative;
+    height: 20px;
+}
+.tree-view .tree-view-node .tree-view-node-title:hover
+{
+    background: #f0f0f0;
+}
+.tree-view .tree-view-node.selected > .tree-view-node-title
+{
+    outline: 2px solid #ff9900;
+}
+.tree-view .tree-view-node .tree-view-node-title .glyphicon-plus
+{
+    position: relative;
+    top: 0px;
+    left: 0px;
+    font-size: 10px;
+}
