@@ -1,0 +1,30 @@
+.tree-view
+{
+    height: 100%;
+    overflow: auto;
+}
+.tree-view .tree-view-node
+{
+    position: relative;
+    margin: 5px 0px 0px 10px;
+    font-size: 14px;
+}
+.tree-view .tree-view-node .tree-view-node-title
+{
+    cursor: pointer;
+    position: relative;
+    padding:2px 5px;
+}
+.tree-view .tree-view-node .tree-view-node-title:hover
+{
+    background: #f0f0f0;
+}
+.tree-view .tree-view-node.selected > .tree-view-node-title
+{
+    background:rgba(255, 106, 0, 0.5)
+}
+.tree-view .tree-view-node .tree-view-node-title i
+{
+    width:20px;
+    display:inline-block;
+}
