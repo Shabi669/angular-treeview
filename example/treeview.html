@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+
+<html lang="en" ng-app="ngApplication">
+
+<head>
+    <title>Tree View</title>
+
+    <script src="jquery.js"></script>
+    <script src="angular.js"></script>
+    <script src="treeview.js"></script>
+
+    <link type="text/css" href="treeView.css" rel="stylesheet" />
+</head>
+<body ng-cloak ng-controller="ngPageController">
+
+    <tree-view nodes="treeNodes" node-template="treeNodeTemplate" node-selected="treeNodeSelected(event, node)"></tree-view>
+
+    <div>
+        <input type="text" ng-model="addNodeName"/>
+        <input type="button" value="Add" ng-click="addNode()"/>
+    </div>
+    
+    <script type="text/javascript">
+
+        ngApplication = angular.module('ngApplication', ['app.treeView']);
+
+        ngApplication.controller('ngPageController', ['$scope', function ($scope)
+        {
+            $scope.treeNodes = [];
+                        
+            $scope.treeNodeTemplate = ''
+                + '<div>'
+                    + '<i>'
+                        + '<span ng-show="node.children.length > 0 && node.open">-</span>'
+                        + '<span ng-show="node.children.length > 0 && !node.open">+</span>'
+                    + '</i>'
+                    + '<span>{{node.name}}</span>'
+                + '</div>';
+
+            $scope.treeNodeSelected = function (event, node)
+            {
+                $scope.selectedNode = node;
+
+                return true;
+            }
+
+            $scope.addNodeName = '';
+            $scope.addNode = function ()
+            {
+                if (!$scope.selectedNode) return;
+                if ($scope.addNodeName.length == 0) return;
+
+                if (!$scope.selectedNode.children)
+                    $scope.selectedNode.children = [];
+
+                $scope.selectedNode.children.push({ name: $scope.addNodeName });
+                $scope.selectedNode.open = true;
+                $scope.addNodeName = '';
+            }
+            $scope.loadTreeNodes = function()
+            {
+                $scope.treeNodes = [
+                   {
+                       number: '1'
+                       , name: 'Client Side'
+                       , children: [
+                           {
+                               number: '1.1'
+                               , name: 'HTML'
+                           }
+                           , {
+                               number: '1.2'
+                               , name: 'Style'
+                               , children: [
+                                   {
+                                       number: '1.2.1'
+                                       , name: 'CSS'
+                                   }
+                                   , {
+                                       number: '1.2.2'
+                                       , name: 'SCSS'
+                                   }
+                               ]
+                           }
+                           , {
+                               number: '1.3'
+                               , name: 'Script'
+                               , children: [
+                                   {
+                                       number: '1.3.1'
+                                       , name: 'Java Script'
+                                   }
+                                   , {
+                                       number: '1.3.2'
+                                       , name: 'Coffe Script'
+                                   }
+                                   , {
+                                       number: '1.3.3'
+                                       , name: 'Type Script'
+                                   }
+                               ]
+                           }
+                       ]
+                   }
+                   , {
+                       number: '2'
+                       , name: 'Server Side'
+                       , children: [
+                           {
+                               number: '2.1'
+                               , name: 'NodeJS'
+                           }
+                           , {
+                               number: '2.2'
+                               , name: 'MVC - Razor'
+                           }
+                       ]
+                   }
+                   , {
+                       number: '3'
+                       , name: 'Data Bases'
+                       , children: [
+                           {
+                               number: '3.1'
+                               , name: 'SQL'
+                           }
+                           , {
+                               number: '3.2'
+                               , name: 'No-SQL'
+                           }
+                       ]
+                   }
+                ];
+            }
+
+            $scope.loadTreeNodes();
+
+        }]);
+
+    </script>
+</body>
+
+</html>
